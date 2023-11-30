@@ -60,6 +60,7 @@ else
                 else
                     echo -e "word\n$(echo -ne "$line" | md5sum | cut -c -32)" > $TMP
                 fi
+                rm $tmp
 
             ;;word) 
                 tmp=$(mktemp /tmp/rofi-tdk-word.XXXXXXXX)
@@ -117,11 +118,10 @@ else
                 else
                     echo -ne "line\n$hash\n$markup\n$(cat $details | sed -n ${line}p)" > $TMP
                 fi
-                rm $tmp
+                rm $tmp $details
                 ;;
             *) 
-                rm $TMP
-                exit
+                rm $TMP; exit
         esac
     done
 fi
