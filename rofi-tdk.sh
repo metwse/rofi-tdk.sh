@@ -104,7 +104,7 @@ else
                         ;;'s') 
                                 echodetails "$data"
                                 echotmp "Kalıp sözler: $(echo "$data" | sed 's/|/, /g')"
-                        ;;'') echo '' >> $tmp; meaning=1
+                        ;;'') echotmp ''; meaning=1
                         ;;*) if [ -n "$data" ]; then echotmp "$data"; fi
                     esac
                 done
