@@ -1,8 +1,6 @@
 ![egsoz-ekzoz-egzos-eksoz-eksoz](https://github.com/metwse/rofi-tdk.sh/assets/108795071/bcc2a3ae-e182-4b4c-90a7-2053123c655d)
 
-
-https://github.com/metwse/rofi-tdk.sh/assets/108795071/17c70710-9157-439f-bbf8-3c3db42fc87b
-
+<video src='https://github.com/metwse/rofi-tdk.sh/assets/108795071/17c70710-9157-439f-bbf8-3c3db42fc87b'></video>
 
 # rofi-tdk.sh 
 Türkçe sözlüğe direkt Rofi'den erişin.\
