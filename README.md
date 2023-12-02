@@ -1,5 +1,6 @@
 # rofi-tdk.sh 
-Türkçe sözlüğe direkt Rofi'den erişin.
+Türkçe sözlüğe direkt Rofi'den erişin.\
+Veriler [sozluk.gov.tr](https://sozluk.gov.tr/)'den aynen alınmıştır. Hatalı (bağlaç öbeği, bağlaç grubu, … geçmişi (olmak) gibi), anlamsız (111www4sa, 113jhhgffpppp gibi) kelimeler ve yazım hatası bulunduran (din \[2\] gibi) maddeler; orijinal sözlükte de özdeştir. Türkçe sözlüğün ham verileri için [tdk-sozluk.git](https://github.com/metwse/tdk-sozluk)'e bakabilirsiniz.
 
 ## Kurulum 
 1. [Releases](https://github.com/metwse/rofi-tdk.sh/releases) sayfasından veri tabanının son versiyonunu indirin ve `/var/rofi-tdk.tar.gz` konumuna kaydedin. ([direkt bağlantı](https://github.com/metwse/rofi-tdk.sh/releases/latest/download/rofi-tdk.tar.gz))
@@ -18,6 +19,3 @@ CACHE=/tmp/rofi-tdk-cache/ rofi-tdk.sh # pek tavsiye etmem. veri tabanının boy
 
 ## Özelleştirmeler
 Tema, renk vb. düzenlemeler için kaynak kodundaki `MARKUP` değişkenleri kullanılabilir.
-
-
-Veriler [sozluk.gov.tr](https://sozluk.gov.tr/)'den aynen alınmıştır. Hatalı (bağlaç öbeği, bağlaç grubu, … geçmişi (olmak) gibi), anlamsız (111www4sa, 113jhhgffpppp gibi) kelimeler ve yazım hatası bulunduran (din \[2\] gibi) maddeler; orijinal sözlükte de özdeştir. Türkçe sözlüğün ham verileri için [tdk-sozluk.git](https://github.com/metwse/tdk-sozluk)'e bakabilirsiniz.
