@@ -1,24 +1,33 @@
 #!/bin/bash
+# Public Domain
+# İstediğiniz gibi kullanın. Atıfta bulunmanıza gerek yok.
 
-DATABASE=/var/tdk.tar.gz
-CACHE=/dev/shm/rofi-tdk-cache # /dev/shm/'de veriler RAM'de tutulur. Hızlı erişim için tercih ediyorum, /tmp'yi kullanabilirsiniz.
+# Ayarlanabilir ortam değişkenleri için README.md'yi kontrol edin.
+DATABASE="${DATABASE:=/var/rofi-tdk.tar.gz}"
+CACHE="${CACHE:=/dev/shm/rofi-tdk-cache}"
 
-COLOR_WORD='#E48F45'
 
 if ! [ -d "$CACHE" ]; then
-    mkdir $CACHE
-    tar -xvzf $DATABASE -C $CACHE/
+    echo "Ön bellek yükleniyor."
+    mkdir $CACHE; tar -xzf $DATABASE -C $CACHE/
 fi
 
+# Başlangıç modu. i3wm gibi bir pencere yöneticisi kullanıyorsanız başlangıçta bu scripti `rofi-tdk.sh init` şeklinde çağırmayı deneyebilirsiniz.
 if [ "$1" = 'init' ]; then exit; fi
 
+# UYARI: Markup yaparken " işareti kullanacaksanız önüne ters eğik çizgi getirin. \"
+# data: kelime, on_suffix: ek alma durumunda kelimedeki değişim, origin_id: kelimenin kaçıncı kökü
+MARKUP_WORD='<i><span fgcolor=\"#E48F45\">$data$on_suffix $origin_id</span></i>' 
+# data: anlam, meaning_id: kaçıncı anlam, $features: kelimenin özellikleri
+MARKUP_MEANING='<b>$meaning_id.</b><span fgcolor=\"red\"><i>$features</i></span> $data' 
+# data: örnek metni, writer: yazar
+MARKUP_EXAMPLE='<span>$data</span> <i>$writer</i>' 
 
-
-ROFI_BIN=$(command -v rofi)
 
 runrofi () {
-    $ROFI_BIN -sort fzf -normalize-match "$@"
+    $(command -v rofi) -sorting-method fzf -sort true -normalize-match "$@"
 }
+
 
 if [ "$1" = 'word' ]; then 
     echo -ne 'exit' > $TMP
@@ -29,18 +38,16 @@ if [ "$1" = 'word' ]; then
         else
             echo -e "word\n$hash" > $TMP
         fi
-    else
-        cat $CACHE/list
-    fi
+    else cat $CACHE/list; fi
 else
     export TMP=$(mktemp /tmp/rofi-tdk.XXXXXXXX)
     echo -ne 'start' > $TMP
     while true; do
         fl=$(cat $TMP | head -n 1)
-        mesg=${fl//[$'\t\r\n']}
         data=$(cat $TMP | tail -n +2)
         >$TMP
-        case $(echo $mesg | head -n 1) in
+
+        case $(echo ${fl//[$'\t\r\n']} | head -n 1) in
             start) 
                 runrofi -modi "TDK:$0 word" -show TDK 
                 
@@ -72,39 +79,37 @@ else
                     echo $@ >> $tmp
                     if [[ "$(tail -c 1 $tmp | od -An -t x1)" == ' 0a' ]]; then echo '' >> $details; fi
                 }
-                echodetails () {
-                    echo -n $@ >> $details
-                }
+                echodetails () { echo -n $@ >> $details; }
 
                 echotmp ''
-                meaning=1; writer=; features=; suffix=; origin=
+                meaning_id=1; writer=; features=; on_suffix=; origin_id=
                 echo "$data" | while read line; do 
                     type=$(echo $line | cut -c 1)
                     data=$(echo $line | cut -c 2-)
                     if [ -z "$data" ]; then data=$(echo $line | sed -n 's/^\s*\w\s\+\(.*\)$/\1/p'); fi
                     case $type in
                         'm') 
-                            echotmp "<i><span fgcolor='$COLOR_WORD'>$data$suffix $origin</span></i>"
-                            suffix=; origin=
+                            echotmp "$(eval "echo \"$MARKUP_WORD\"")"
+                            on_suffix=; origin_id=
                         ;;'a')
-                            echotmp -e "<b>$meaning.</b><span fgcolor='red'><i>$features</i></span> $data"
-                            ((meaning ++)); features=
+                            echotmp -e "$(eval "echo \"$MARKUP_MEANING\"")"
+                            ((meaning_id ++)); features=
                         ;;'o') 
-                            echotmp -e "<span>$data</span> <i>$writer</i>"
+                            echotmp -e "$(eval "echo \"$MARKUP_EXAMPLE\"")"
                             writer=
                         ;;'y') writer="- $data"
-                        ;;'k') origin="($data)"
+                        ;;'k') origin_id="($data)"
                         ;;'z') features=" $data"
-                        ;;'t') if [ -n "$data" ]; then suffix=", -$data"; fi
+                        ;;'t') if [ -n "$data" ]; then on_suffix=", -$data"; fi
                         ;;'b') 
                             if [ -n "$data" ]; then
                                 echodetails $(echo "$data" | sed 's/, /|/g')
                                 echotmp "Birleşik isimler: $data"
                             fi
                         ;;'s') 
-                                echodetails "$data"
-                                echotmp "Kalıp sözler: $(echo "$data" | sed 's/|/, /g')"
-                        ;;'') echotmp ''; meaning=1
+                            echodetails "$data"
+                            echotmp "Kalıp sözler: $(echo "$data" | sed 's/|/, /g')"
+                        ;;'') echotmp ''; meaning_id=1
                         ;;*) if [ -n "$data" ]; then echotmp "$data"; fi
                     esac
                 done
@@ -119,8 +124,8 @@ else
                     echo -ne "line\n$hash\n$markup\n$(cat $details | sed -n ${line}p)" > $TMP
                 fi
                 rm $tmp $details
-                ;;
-            *) 
+
+            ;;*) 
                 rm $TMP; exit
         esac
     done
