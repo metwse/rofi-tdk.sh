@@ -1,3 +1,5 @@
+![egsoz-ekzoz-egzos-eksoz-eksoz](https://github.com/metwse/rofi-tdk.sh/assets/108795071/bcc2a3ae-e182-4b4c-90a7-2053123c655d)
+
 # rofi-tdk.sh 
 Türkçe sözlüğe direkt Rofi'den erişin.\
 Veriler [sozluk.gov.tr](https://sozluk.gov.tr/)'den aynen alınmıştır. Hatalı (bağlaç öbeği, bağlaç grubu, … geçmişi (olmak) gibi), anlamsız (111www4sa, 113jhhgffpppp gibi) kelimeler ve yazım hatası bulunduran (din \[2\] gibi) maddeler; orijinal sözlükte de özdeştir. Türkçe sözlüğün ham verileri için [tdk-sozluk.git](https://github.com/metwse/tdk-sozluk)'e bakabilirsiniz.
