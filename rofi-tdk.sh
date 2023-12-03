@@ -73,7 +73,7 @@ else
                 tmp=$(mktemp /tmp/rofi-tdk-word.XXXXXXXX)
                 details=$(mktemp /tmp/rofi-tdk-details.XXXXXXXX)
                 hash=$data
-                data=$(cat "$CACHE/$hash" | tail -n +2)
+                data=$(cat "$CACHE/$hash")
 
                 echotmp () {
                     echo $@ >> $tmp
