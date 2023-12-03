@@ -23,3 +23,7 @@ CACHE=/tmp/rofi-tdk-cache/ rofi-tdk.sh # pek tavsiye etmem. veri tabanının boy
 
 ## Özelleştirmeler
 Tema, renk vb. düzenlemeler için kaynak kodundaki `MARKUP` değişkenleri kullanılabilir.
+
+## Gereksinimler
+`sed`, `cut`, `head`, `tail`, `md5sum` gibi temel Linux fonksiyonları, hemen hemen bütün dağıtımlarda yüklü gelir.\
+`rofi` (v1.7'den öncesinde test edilmedi)
