@@ -61,8 +61,12 @@ while true; do
             tmp=$(mktemp /tmp/rofi-tdk-line.XXXXXXXX)
             echo -ne "Geri" > $tmp
             details=$(echo "$data" | sed -n 3p) 
-            if [ -n "$details" ]; then echo "|$details" >> $tmp
-            else mesg='-mesg'; sentence="$(echo "$data" | sed -n 2p)"; fi
+            if [ -n "$details" ]; then 
+                echo "|$details" >> $tmp
+                mesg=; sentence=
+            else 
+                mesg='-mesg'; sentence="$(echo "$data" | sed -n 2p)"
+            fi
             line=$(cat $tmp | runrofi -dmenu $mesg "$sentence" -markup-rows -p 'TDK' -sep '|')
             if [ "$line" = "Geri" ] || [ -z "$line" ]; then
                 echo -e "word\n$(echo "$data" | sed -n 1p)" > $TMP
