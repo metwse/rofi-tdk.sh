@@ -98,8 +98,8 @@ while true; do
                         echotmp "$(eval "echo \"$MARKUP_WORD\"")"
                         on_suffix=; origin_id=
                     ;;'a')
-                        w343="$(echo $data | sed 's/^343\ //g')"
-                        if [[ "$data" == "343 "* ]]; then 
+                        w343="$(echo $data | sed 's/^343\ //g; s/^► //g; s/([IV]*)$//g')"
+                        if [[ "$data" == "343 "* ]] || [[ "$data" == "► "* ]]; then 
                             echodetails $w343
                         fi
                         data=$(echo $data | sed 's/^343\ /<i>bakınız<\/i> /')
