@@ -67,7 +67,7 @@ while true; do
             if [ "$line" = "Geri" ] || [ -z "$line" ]; then
                 echo -e "word\n$(echo "$data" | sed -n 1p)" > $TMP
             else
-                meaning "$word"
+                meaning "$line"
             fi
             rm $tmp
 
