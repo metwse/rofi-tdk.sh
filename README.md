@@ -11,6 +11,13 @@ Veriler [sozluk.gov.tr](https://sozluk.gov.tr/)'den aynen alınmıştır. Hatal�
 2. `rofi-tdk.sh` dosyasını başlatın.
 3. (Opsiyonel) i3wm ya da benzeri bir pencere yöneticisi kullanıyorsanız i3 config'inize `exec /bilmemneresi/rofi-tdk.sh init` ekleyebilirsiniz.
 
+## Kullanım
+Kelimede düzeltme işareti (â, û, î) olduğunda aramada düzeltme işareti kullanmazsanız istediğiniz kelime listede aşağıda kalır. X11'de â, û ve î; altgr ile (altgr-a gibi) yazılabilir. Örneğim mekân kelimesini mekan şeklinde aratırsanız uygun sonuç için aşağı inmeniz gerekecektir.\
+**Anlam menüsünde**:\
+ESC: Arama menüsüne döner.\
+Eğer uzun olduğu için görünmeyen bir madde varsa onu seçerek büyütebilirsiniz.\
+*Bakınız* (Kullanılması tavsiye edilen kelimeyi ifade eder.) ya da ► işaretiyle (Eş ya da yakın anlamlılık belirtir.) başlayan maddeler, seçildiğinde ilgili kelimeye yönlendirir.
+
 ## Ayarlamalar
 Veri tabanını varsayılandan başka bir konuma kaydetmek istiyorsanız `DATABASE` ortam değişkenini kullanabilirsiniz.\
 Örneğin `DATABASE="~/.local/share/rofi-tdk.tar.gz" rofi-tdk.sh`
@@ -25,5 +32,5 @@ CACHE=/tmp/rofi-tdk-cache/ rofi-tdk.sh # pek tavsiye etmem. veri tabanının boy
 Tema, renk vb. düzenlemeler için kaynak kodundaki `MARKUP` değişkenleri kullanılabilir.
 
 ## Gereksinimler
-`sed`, `cut`, `head`, `tail`, `md5sum` gibi temel Linux fonksiyonları, hemen hemen bütün dağıtımlarda yüklü gelir.\
+`sed`, `cut`, `head`, `tail`, `md5sum`, `mktemp` gibi temel GNU/Linux fonksiyonları, hemen hemen bütün dağıtımlarda yüklü gelir.\
 `rofi` (v1.7'den öncesinde test edilmedi)
