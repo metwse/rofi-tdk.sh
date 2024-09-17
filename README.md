@@ -6,7 +6,9 @@
 Türkçe sözlüğe direkt Rofi'den erişin.\
 Veriler [sozluk.gov.tr](https://sozluk.gov.tr/)'den aynen alınmıştır. Hatalı (bağlaç öbeği, bağlaç grubu, … geçmişi (olmak) gibi), anlamsız (111www4sa, 113jhhgffpppp gibi) kelimeler ve yazım hatası bulunduran (din \[2\] gibi) maddeler; orijinal sözlükte de özdeştir. Türkçe sözlüğün ham verileri için [tdk-sozluk.git](https://github.com/metwse/tdk-sozluk)'e bakabilirsiniz.
 
-## Kurulum 
+## Kurulum
+[@NoobSolid26](https://techolay.net/sosyal/uye/noobsolid26.761/)'ya yaptığı kurulum rehberi için teşekkürler. Daha detaylı bu rehbere göz atabilirsiniz: [techolay bağlantısı](https://techolay.net/sosyal/konu/linuxta-rofi-tdk-kurulumu.34664/).
+
 1. [Releases](https://github.com/metwse/rofi-tdk.sh/releases) sayfasından veri tabanının son versiyonunu indirin ve `/var/rofi-tdk.tar.gz` konumuna kaydedin. ([direkt bağlantı](https://github.com/metwse/rofi-tdk.sh/releases/latest/download/rofi-tdk.tar.gz))
 2. `rofi-tdk.sh` dosyasını başlatın.
 3. (Opsiyonel) i3wm ya da benzeri bir pencere yöneticisi kullanıyorsanız i3 config'inize `exec /bilmemneresi/rofi-tdk.sh init` ekleyebilirsiniz.
